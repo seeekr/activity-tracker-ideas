@@ -1,0 +1,18 @@
+<template name="demo">
+  <table>
+    <tr>
+      <th>time</th>
+      <th>pageX</th>
+      <th>pageY</th>
+      <th>click el</th>
+    </tr>
+    {{#each events}}
+      <tr>
+        <td>{{time}}</td>
+        <td>{{pageX}}</td>
+        <td>{{pageY}}</td>
+        <td>{{click}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</template>

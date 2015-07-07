@@ -1,0 +1,32 @@
+<head>
+  <title>clicktracker</title>
+</head>
+
+<body>
+<h1>Click Tracking Demo</h1>
+
+{{>demo}}
+
+{{> clicktest}}
+</body>
+
+<template name="clicktest">
+  <button>Click Me</button>
+  <div id="test">
+    <button>click</button>
+  </div>
+  <div class="">
+    <p>
+      <a href="#">click</a>
+    </p>
+  </div>
+  <div class="outer">
+    <div class="inner">
+      <button>click</button>
+    </div>
+  </div>
+  <div class="outer">
+    <button id="button1">click</button>
+  </div>
+  <button class="outer outer2">click</button>
+</template>
