@@ -45,16 +45,61 @@ if (Meteor.isClient) {
     localEvents.push(_.extend(e, {time: new Date()}))
   }
 
-  setInterval(() => {
-    save(localEvents)
-  }, 1000)
+  let interval
 
-  $(document).on('mousemove', _.throttle(function (e) {
+  let onMousemove = _.throttle(function (e) {
     addEvent(_.pick(e, 'pageX', 'pageY'))
-  }, 250, {leading: true, trailing: true}))
+  }, 250, {leading: true, trailing: true})
 
-  $(document).click('*', function (e) {
+  let onClick = function (e) {
     let evt = _.extend(_.pick(e, 'pageX', 'pageY'), {click: getElementSelector(e.target)})
     addEvent(evt)
-  })
+  }
+
+  record = function () {
+    interval = setInterval(() => {
+      save(localEvents)
+    }, 1000)
+
+    $(document)
+      .on('mousemove.clicktracker', onMousemove)
+      .on('click.clicktracker', '*', onClick)
+  }
+
+  stop = function () {
+    $(document).off('.clicktracker')
+    clearInterval(interval)
+    if (localEvents.length) {
+      save(localEvents)
+    }
+  }
+
+  playback = function () {
+    // game plan:
+    // load last "session"
+    // iterate over all movement events to: smooth out movement / interpolate between positions
+    // - always looking at where the cursor should move next
+    // - first movement event we encounter has our current cursor position
+    // - if more than 250ms + TOLERANCE have passed since the last movement event then this is a new movement
+    // - otherwise we interpolate to that new position over the time difference
+
+    let events = loadLastSession()
+
+    // -- movement --
+    {
+      let ix = events.findIndex(e => !e.click), last = ix !== -1 ? events[ix] : null
+      if (last) {
+        // set initial cursor position
+
+      }
+      let nextMovement = () => {
+
+      }
+    }
+
+    // -- clicks --
+    {
+
+    }
+  }
 }

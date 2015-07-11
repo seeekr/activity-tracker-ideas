@@ -10,6 +10,18 @@
 {{> clicktest}}
 </body>
 
+<template name="playback">
+  <div class="playback">
+    <div id="cursor">
+      <i class="fa fa-money"></i>
+    </div>
+  </div>
+</template>
+<template name="controls">
+  <button onClick={{record}}><i class="fa fa-record"></i></button>
+  <button onClick={{play}}><i class="fa fa-play"></i></button>
+</template>
+
 <template name="clicktest">
   <button>Click Me</button>
   <div id="test">
